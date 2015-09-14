@@ -8,34 +8,34 @@
                 if (r != null) return unescape(r[2]); return null; //返回参数值
             }
         
-            // TODO: load version data from a static file
-            var latestVersion = '1.0';
-            var latestBuild = '2';
+            // TODO: load version data from a static file, with type of Number
+            var latestVersion = 1.0;
+            var latestBuild = 2;
             
             // check version
             var downloadUrl = 'itms-services://?action=download-manifest&url=https://ghostself.github.io/mt/meituanchaoshi.plist';
             
-            var version = Number(getUrlParam('version'));
-            var build = Number(getUrlParam('build'));
+            var version = getUrlParam('version');
+            var build = getUrlParam('build');
             
-            if(version * 10000 + build < latestVersion * 10000 + latestBuild) {
+            if(Number(version) * 10000 + Number(build) < latestVersion * 10000 + latestBuild) {
                 // need update
+                // TODO: use YES/NO dialog instead
                 alert('检测到新版本，当前版本为version ' + version + ' build ' + build);
                 window.location.href = updateUrl;
+                // TODO: post-update interactions
+                
             } else {
                 // redirect to landing page
+                // TODO: use chaoshi.meituan.com instead
                 window.location.href = 'http://i.waimai.meituan.com';
             }
             
                 </script>
     </head>
     <body>
-        <h1>download</h1>
         <p>
-        <a href='itms-services://?action=download-manifest&url=https://ghostself.github.io/mt/meituanchaoshi.plist'>update</a>
-        </p>
-        <p>
-        <a href='http://i.waimai.meituan.com'>GO</a>
+        <a href='http://i.waimai.meituan.com'>继续访问</a>
         </p>
     </body>
 </html>
