@@ -8,17 +8,25 @@
                 if (r != null) return unescape(r[2]); return null; //返回参数值
             }
         
+            function versionAsNumber(version) {
+                var a = version.split('.');
+                var n = 0;
+                for (var i = 0; i < a.length; i++) {
+                    n = n * 100 + Number(a[i]);
+                }
+                return n;
+            }
+        
             // TODO: load version data from a static file, with type of Number
-            var latestVersion = 1.0;
-            var latestBuild = 2;
+            var latestVersion = '1.0.3';
             
             // check version
             var downloadUrl = 'http://ghostself.github.io/mt';//'itms-services://?action=download-manifest&url=https://ghostself.github.io/mt/meituanchaoshi.plist';
             
             var version = getUrlParam('version');
-            var build = getUrlParam('build');
+            var from = getUrlParam('f');
             
-            if(Number(version) * 10000 + Number(build) < latestVersion * 10000 + latestBuild) {
+            if(versionAsNumber(version) < versionAsNumber(latestVersion)) {
                 // need update
                 // TODO: use YES/NO dialog instead
                 alert('检测到新版本，当前版本为version ' + version + ' build ' + build);
